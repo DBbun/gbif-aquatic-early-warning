@@ -3,7 +3,7 @@
 An open, reproducible Jupyter notebook that converts a GBIF-mediated aquatic occurrence
 download into a structured early-warning and planning tool.
 
-**Submitted to:** 2026 GBIF Ebbe Nielsen Challenge  
+**Prepared for submission to:** 2026 GBIF Ebbe Nielsen Challenge  
 **Author:** Uri Kartoun, DBbun LLC, Cambridge MA, USA  
 **License:** MIT
 
@@ -19,7 +19,7 @@ Starting from a GBIF Simple CSV download, the simulator produces:
 | `top_species.csv` | Top 30 species by record count |
 | `species_year_counts.csv` | Species × year occurrence matrix |
 | `emerging_species_signals.csv` | Effort-corrected emerging signal scores (2,536 species) |
-| `dbbun_priority_monitoring_table.csv` | Composite risk-ranked top 25 priority species |
+| `dbbun_priority_monitoring_table.csv` | Monitoring-priority-ranked top 25 species |
 | `spatial_hotspot_grid.csv` | 0.5° × 0.5° grid cell hotspot scores |
 | `synthetic_future_occurrence_pressure_scenarios.csv` | Synthetic 2026–2030 scenario projections |
 | `trajectory_clusters_pca.png` | PCA plot of 5 species trajectory clusters |
@@ -68,8 +68,7 @@ To use with a different GBIF dataset, update `DATA_PATH` in cell 2:
 DATA_PATH = Path('data/your-gbif-download.csv')
 ```
 
-The notebook auto-detects tab vs. comma delimiters and selects available columns — it works
-with any GBIF Simple occurrence download.
+The notebook auto-detects tab vs. comma delimiters and selects available columns. Designed for GBIF Simple occurrence downloads with taxon, year, and coordinate fields; adapts gracefully when some optional fields are missing.
 
 ---
 
@@ -88,7 +87,7 @@ The workflow has two parts:
 - Build a species feature matrix (growth, spread, trajectory, anomaly)
 - **Isolation Forest** anomaly detection (200 trees, 8% contamination)
 - **KMeans** trajectory clustering into 5 classes: Emerging, Stable, Declining, Bursty, Sparse
-- Composite risk score (0–100) combining growth, spatial spread, anomaly, and alien flag
+- Composite monitoring priority score (0–100) combining growth, spatial spread, anomaly, and management-relevance flag
 - Spatial hotspot detection on a 0.5° grid
 - **Scenario simulator**: 5 planning scenarios × 5 years × top 50 species
 - Auto-generated Markdown report
@@ -114,7 +113,7 @@ Licence: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 - **68 Emerging** trajectory species identified
 - **203 anomalous** occurrence patterns flagged
 - **13 candidate** management-relevant taxa cross-referenced
-- **Top hotspot:** Trondheim Fjord region (63.5°N, 9.0°E) — 1,215 species, 27,520 records
+- **Top hotspot:** Trøndelag coastal/fjord region (63.5°N, 9.0°E) — 1,215 species, 27,520 records
 - **Scenario range (2030):** Rapid Intervention −99% vs. Increased Boating +662% vs. Baseline
 
 ---
@@ -124,18 +123,18 @@ Licence: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 | Scenario | Growth multiplier | Interpretation |
 |----------|------------------|----------------|
 | Baseline | ×1.0 | Current monitoring, no change in pressure |
-| Warming Waters | ×1.3 | +2°C effect on cold-adapted aquatic species |
+| Warming Waters | ×1.3 | Illustrative warming-pressure scenario |
 | Increased Boating | ×1.5 | Hull fouling and ballast water dispersal increase |
 | Early Detection and Response | ×0.7 | Monitoring effort doubles with rapid containment |
 | Rapid Intervention | ×0.4 | Active removal and biosecurity in top hotspots |
 
-> **Note:** Scenario outputs are planning simulations, not ecological forecasts.
+> **Note:** Scenario outputs are planning simulations, not ecological forecasts. The scenario magnitudes are stress-test outputs, not predictions.
 
 ---
 
 ## Candidate management-relevant taxa
 
-The notebook includes an editable list of aquatic management-relevant taxa drawn from NOBANIS
+The notebook includes an editable list of aquatic management-relevant taxa informed by alien-species resources such as NOBANIS
 and Artsdatabanken. This is a screening aid, not an authoritative registry. Users should verify
 matches against their national alien species database before drawing management conclusions.
 
