@@ -3,7 +3,7 @@
 An open, reproducible Jupyter notebook that converts a GBIF-mediated aquatic occurrence
 download into a structured early-warning and planning tool.
 
-**Submitted to:** [2026 GBIF Ebbe Nielsen Challenge](https://www.gbif.org/article/1G82GL7jw08kIAkkIAkkIC/ebbe-nielsen-challenge)  
+**Submitted to:** 2026 GBIF Ebbe Nielsen Challenge  
 **Author:** Uri Kartoun, DBbun LLC, Cambridge MA, USA  
 **License:** MIT
 
@@ -98,10 +98,13 @@ The workflow has two parts:
 ## Dataset used in this submission
 
 **Vannmiljø - artsforekomster**  
-Norwegian Environment Agency aquatic occurrence records, accessed via GBIF.  
-GBIF download: `doi:10.15468/dl.xxxxx`  
+Published by the Norwegian Environment Agency (Miljødirektoratet), hosted by GBIF Norway.  
+DOI: [10.15468/u35j52](https://doi.org/10.15468/u35j52)  
 Records: 1,951,094 | Species: 4,563 | Years: 2008–2026  
-License: CC BY 4.0
+Licence: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+
+> The source data is licensed CC BY 4.0. The notebook code is licensed MIT.
+> When reusing outputs derived from this dataset, please cite the dataset DOI above.
 
 ---
 
